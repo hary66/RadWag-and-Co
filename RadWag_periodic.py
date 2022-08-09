@@ -4,7 +4,7 @@ import logging
 import serial.tools.list_ports as port_list
 import os
 
-logging_file = 'log_DGTP.csv'
+logging_file = 'log_RADWAG.csv'
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -86,9 +86,12 @@ while True:
 
 
     if (ser.inWaiting()!=0):
-        datapacket = ser.readline()
-        datapacket = str(datapacket, 'utf-8')
-        datapacket = datapacket.strip('\r\n')
-        #datapacket =datapacket.strip('?')
-        # #datapacket =datapacket.strip('SI')
-        logger.critical(datapacket)
+        try:
+            datapacket = ser.readline()
+            datapacket = str(datapacket, 'utf-8')
+            datapacket = datapacket.strip('\r\n')
+            #datapacket =datapacket.strip('?')
+            # #datapacket =datapacket.strip('SI')
+            logger.critical(datapacket)
+        except OSError:
+            logger.critical("Data not received. Skipping..")

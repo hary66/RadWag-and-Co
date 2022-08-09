@@ -87,9 +87,12 @@ while True:
 
 
     if (ser.inWaiting()!=0):
-        datapacket = ser.readline()
-        datapacket = str(datapacket, 'utf-8')
-        datapacket = datapacket.strip('\r\n')
-        #datapacket =datapacket.strip('?')
-        # #datapacket =datapacket.strip('SI')
-        logger.critical(datapacket)
+        try:
+            datapacket = ser.readline()
+            datapacket = str(datapacket, 'utf-8')
+            datapacket = datapacket.strip('\r\n')
+            #datapacket =datapacket.strip('?')
+            # #datapacket =datapacket.strip('SI')
+            logger.critical(datapacket)
+        except OSError:
+            logger.critical("Data not received. Skipping..")
