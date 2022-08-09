@@ -61,7 +61,8 @@ def choosePort():
 
 def getLoad():
     #print(ser.write(b"SI\r\n"))
-    message = 'SI\r\n'
+    #message = 'READ\r\n'
+    message = 'GR10\r\n'
     logger.info("get_load-routine" + message)
     ser.write(message.encode('Ascii'))
     #time.sleep(0.5)
