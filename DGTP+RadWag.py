@@ -12,13 +12,16 @@ logger.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s * %(created)f * %(message)s')
 
 stream_handler = logging.StreamHandler()
-stream_handler.setLevel(logging.WARNING)
+#stream_handler.setLevel(logging.WARNING)
+stream_handler.setLevel(logging.DEBUG)
 stream_handler.setFormatter(formatter)
 logger.addHandler(stream_handler)
 
 file_handler = logging.FileHandler(logging_file, 'a')
 file_handler.setFormatter(formatter)
-file_handler.setLevel(logging.CRITICAL)
+#file_handler.setLevel(logging.CRITICAL)
+file_handler.setLevel(logging.DEBUG)
+
 logger.addHandler(file_handler)
 
 def head_of_file():
@@ -68,13 +71,16 @@ def getLoad_RadWag():
     message = 'SI\r\n'
     logger.info("get_load-routine" + message)
     ser_RadWag.write(message.encode('Ascii'))
+    logger.debug('4')
+
     
 
 def getLoad_DGTP():
     message = 'GR10\r\n'
     logger.info("get_load-routine" + message)
     ser_DGTP.write(message.encode('Ascii'))
-    
+    logger.debug('5')
+
 
 period = 5    
 last = time.time()
@@ -107,6 +113,7 @@ while True:
             # #datapacket =datapacket.strip('SI')
             msg[0] = datapacket
             RadWag_flag = 1
+            logger.debug('1')
         except OSError:
             logger.critical("Data not received. Skipping..")
 
@@ -119,6 +126,8 @@ while True:
             # #datapacket =datapacket.strip('SI')
             msg[1] = datapacket
             DGTP_flag = 1
+            logger.debug('2')
+
         except OSError:
             logger.critical("Data not received. Skipping..")
             
@@ -129,3 +138,5 @@ while True:
         RadWag_flag = 0
         DGTP_flag = 0
         logger.critical(message)
+        logger.debug('3')
+
