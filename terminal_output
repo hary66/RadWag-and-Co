@@ -1,0 +1,15 @@
+2022-08-11 21:13:43,037 * 1660245223.037045 * 5
+2022-08-11 21:13:43,037 * 1660245223.037282 * 5 second has elapsed
+2022-08-11 21:13:43,070 * 1660245223.070896 * 2
+2022-08-11 21:13:43,076 * 1660245223.076860 * 1
+2022-08-11 21:13:43,077 * 1660245223.077470 * SI       28.341 kg * ST,GX,    25.635,kg
+2022-08-11 21:13:43,077 * 1660245223.077847 * 3
+Traceback (most recent call last):
+  File "/home/pi/Documents/Python/serial/DGTP+RadWag.py", line 120, in <module>
+    if (ser_DGTP.inWaiting()!=0):
+  File "/usr/lib/python3/dist-packages/serial/serialutil.py", line 594, in inWaiting
+    return self.in_waiting
+  File "/usr/lib/python3/dist-packages/serial/serialposix.py", line 531, in in_waiting
+    s = fcntl.ioctl(self.fd, TIOCINQ, TIOCM_zero_str)
+OSError: [Errno 5] Input/output error
+(myVenv) pi@raspberrypi:~/Documents/Python/serial $
